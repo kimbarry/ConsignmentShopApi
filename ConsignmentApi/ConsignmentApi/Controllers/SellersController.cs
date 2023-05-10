@@ -139,7 +139,6 @@ namespace ConsignmentApi.Controllers
                
             };
             TempDataStore.Add(sellerToAdd);
-            Console.WriteLine("");
         }
 
         // PUT api/<SellersController>/5
@@ -152,6 +151,8 @@ namespace ConsignmentApi.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            TempDataStore.Remove(TempDataStore.FirstOrDefault(s => s.SellerId == id));
+         
         }
     }
 }

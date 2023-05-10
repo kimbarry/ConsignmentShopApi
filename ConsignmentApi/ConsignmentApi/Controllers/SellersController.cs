@@ -18,6 +18,7 @@ namespace ConsignmentApi.Controllers
                     SellerId = 1,
                     FirstName = "Seller 1",
                     LastName = "",
+                    AccountToCredit = "Smith",
                     Email = "test@test.com",
                     IsActive = true,
                     CellNum = "555-555-5555",
@@ -32,6 +33,7 @@ namespace ConsignmentApi.Controllers
                     SellerId = 2,
                     FirstName = "Seller 2",
                     LastName = "",
+                    AccountToCredit = "Baker",
                     Email = "test2@test.com",
                     IsActive = true,
                     CellNum = "222-555-5555",
@@ -49,6 +51,7 @@ namespace ConsignmentApi.Controllers
                     SellerId = 3,
                     FirstName = "Seller 3",
                     LastName = "",
+                    AccountToCredit = "Williams",
                     Email = "test3@test.com",
                     IsActive = false,
                     CellNum = "222-555-5555",
@@ -119,8 +122,24 @@ namespace ConsignmentApi.Controllers
         
         // POST api/<SellersController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void CreateNewSeller([FromBody] SellerCreationDto values)
         {
+            int nextId = TempDataStore.Max(s => s.SellerId) + 1;
+            Seller sellerToAdd = new Seller()
+            {
+                
+                SellerId = nextId,
+                FirstName = values.FirstName,
+                LastName = values.LastName,
+                AccountToCredit = values.AccountToCredit,
+                Email = values.Email,
+                IsActive = true,
+                CellNum = values.CellNum,
+                ItemsList = new List<Item>()
+               
+            };
+            TempDataStore.Add(sellerToAdd);
+            Console.WriteLine("");
         }
 
         // PUT api/<SellersController>/5

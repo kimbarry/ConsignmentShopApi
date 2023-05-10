@@ -12,6 +12,7 @@
                 return FirstName + " " + LastName;
             }
         }
+        public string AccountToCredit { get; set; }
         public string? Email { get; set; }
         public bool? IsActive { get; set; }
         public string? CellNum { get; set; }

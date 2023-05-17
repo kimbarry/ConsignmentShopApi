@@ -143,10 +143,31 @@ namespace ConsignmentApi.Controllers
 
         // PUT api/<SellersController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ActionResult UpdateSeller(int id, [FromBody] SellerUpdateDto values)
         {
-        }
+            //retreive seller from tempdatastore
+            Seller s = TempDataStore.FirstOrDefault(s => s.SellerId == id);
+            //update seller
+            if (s == null)
+            {
+                return NotFound();
+            }
+            s.FirstName = values.FirstName;
+            s.LastName = values.LastName;
+            s.AccountToCredit = values.AccountToCredit;
+            s.Email = values.Email;
+            s.IsActive = values.IsActive;
+            s.CellNum = values.CellNum;
 
+
+
+
+            //save seller back to tempdatastore
+            //TempDataStore[id] = s;
+
+            return NoContent();
+        }
+        
         // DELETE api/<SellersController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
